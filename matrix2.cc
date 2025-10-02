@@ -2,6 +2,8 @@
 #include <algorithm>
 #include <stdexcept>
 
+using namespace std;
+
 Matrix::Matrix(int row, int col) : rows(row), cols(col), data(new int*[row]) {
     for (int i = 0; i < row; i++) {
         data[i] = new int[col]();
@@ -41,21 +43,3 @@ Matrix& Matrix::operator=(const Matrix& other) {
     return *this;
 }
 
-Matrix Matrix::operator&(const Matrix& other) const {
-    if(cols != other.rows){
-        throw invalid_argument("Невозможно перемножить данные матрицы");
-    }
-    
-    Matrix result(rows, other.cols);
-    
-    for(int i = 0; i < rows; i++) {
-        for(int j = 0; j < other.cols; j++) {
-            result.data[i][j] = 0;
-            for(int k = 0; k < cols; k++) {
-                result.data[i][j] += data[i][k] * other.data[k][j];
-            }
-        }
-    }
-    
-    return result;
-}

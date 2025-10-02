@@ -3,10 +3,7 @@
 
 #include <iostream>
 #include <ostream>
-#include <istream>
-
-using namespace std;
- 
+#include <istream> 
 class Matrix {
 private:
     int rows;
@@ -17,28 +14,43 @@ public:
     Matrix(int rows, int cols);
     ~Matrix();
     Matrix(const Matrix& other);
-    Matrix& operator=(const Matrix& other);
-    Matrix operator&(const Matrix& other) const;
 
-    friend std::ostream& operator<<(ostream& os, const Matrix& matrix) {
-    for (int i = 0; i < matrix.rows; i++) {
-        for (int j = 0; j < matrix.cols; j++) {
-            os << matrix.data[i][j] << " ";
+    friend Matrix operator&(const Matrix& lhs, const Matrix& rhs) {
+        if (lhs.cols != rhs.rows) {
+            throw std::invalid_argument("Невозможно перемножить данные матрицы");
         }
-        os << endl;
+        
+        Matrix result(lhs.rows, rhs.cols);
+        for (int i = 0; i < lhs.rows; i++) {
+            for (int j = 0; j < rhs.cols; j++) {
+                result.data[i][j] = 0;
+                for (int k = 0; k < lhs.cols; k++) {
+                    result.data[i][j] += lhs.data[i][k] * rhs.data[k][j];
+                }
+            }
+        }
+        return result;
     }
-    return os;
-}
 
-    friend std::istream& operator>>(istream& is, Matrix& matrix) {
-    cout << "Enter matrix " << matrix.rows << "x" << matrix.cols << ":" << endl;
-    for (int i = 0; i < matrix.rows; i++) {
-        for (int j = 0; j < matrix.cols; j++) {
-            is >> matrix.data[i][j];
+    friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix) {
+        for (int i = 0; i < matrix.rows; i++) {
+            for (int j = 0; j < matrix.cols; j++) {
+                os << matrix.data[i][j] << " ";
+            }
+            os << std::endl;
         }
+        return os;
     }
-    return is;
-}
+
+    friend std::istream& operator>>(std::istream& is, Matrix& matrix) {
+        std::cout << "Введите матрицу " << matrix.rows << "x" << matrix.cols << ":" << std::endl;
+        for (int i = 0; i < matrix.rows; i++) {
+            for (int j = 0; j < matrix.cols; j++) {
+                is >> matrix.data[i][j];
+            }
+        }
+        return is;
+    }
 
     int getRows() const { return rows; }
     int getCols() const { return cols; }

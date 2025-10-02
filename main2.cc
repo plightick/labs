@@ -5,7 +5,6 @@
 using namespace std;
 
 int main() {
-    setlocale(LC_ALL, "");
     Matrix* firstMatrix = nullptr;
     Matrix* secondMatrix = nullptr;
     Matrix* resultMatrix = nullptr;
