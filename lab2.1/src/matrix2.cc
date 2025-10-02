@@ -1,4 +1,4 @@
-#include "matrix2.hpp"
+#include "../header/matrix2.hpp"
 #include <algorithm>
 #include <stdexcept>
 

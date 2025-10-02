@@ -1,7 +1,7 @@
 #include <iostream>
 #include <limits>
-#include "matrix2.hpp"
-#include "operations2.hpp"
+#include "../header/matrix2.hpp"
+#include "../header/operations2.hpp"
 
 using namespace std;
 
@@ -44,9 +44,9 @@ void inputSecondMatrix(Matrix*& secondMatrix) {
 
 void printMatrices(const Matrix* firstMatrix, const Matrix* secondMatrix) {
     cout << "Первая матрица:\n";
-    if (firstMatrix) cout << *firstMatrix; else cout << "Не задана\n";
+    if (firstMatrix) cout << firstMatrix; else cout << "Не задана\n";
     cout << "Вторая матрица:\n";
-    if (secondMatrix) cout << *secondMatrix; else cout << "Не задана\n";
+    if (secondMatrix) cout << secondMatrix; else cout << "Не задана\n";
 }
 
 void multiplyMatrices(const Matrix* firstMatrix, const Matrix* secondMatrix, Matrix*& resultMatrix) {

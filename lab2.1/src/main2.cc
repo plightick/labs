@@ -1,5 +1,5 @@
-#include "matrix2.hpp"
-#include "operations2.hpp"
+#include "../header/matrix2.hpp"
+#include "../header/operations2.hpp"
 #include <iostream>
 using namespace std;
 

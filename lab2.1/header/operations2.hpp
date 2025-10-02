@@ -1,7 +1,7 @@
 #ifndef OPERATIONS2_HPP
 #define OPERATIONS2_HPP
 
-#include "matrix2.hpp"
+#include "../header/matrix2.hpp"
 
 int checkInt();
 void showMenu();
