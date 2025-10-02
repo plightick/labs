@@ -15,6 +15,12 @@ public:
     ~Matrix();
     Matrix(const Matrix& other);
 
+    Matrix(const Matrix& other);
+    Matrix& operator=(const Matrix& other);
+    
+    Matrix(Matrix&& other) noexcept;
+    Matrix& operator=(Matrix&& other) noexcept;
+
     friend Matrix operator&(const Matrix& lhs, const Matrix& rhs) {
         if (lhs.cols != rhs.rows) {
             throw std::invalid_argument("Невозможно перемножить данные матрицы");
@@ -32,7 +38,7 @@ public:
         return result;
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const Matrix& matrix) {
+    friend std::ostream& operator<<(std::ostream& os, Matrix& matrix) {
         for (int i = 0; i < matrix.rows; i++) {
             for (int j = 0; j < matrix.cols; j++) {
                 os << matrix.data[i][j] << " ";
