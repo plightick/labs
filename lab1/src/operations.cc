@@ -102,7 +102,7 @@ int* collectUniqueElementsFromMatrix(const Matrix* matrix, int*& array, int& cou
 int* findUnion(const Matrix* firstMatrix, const Matrix* secondMatrix, int& resultSize) {
     int* unionResult = nullptr;
     int count = 0;
-    int capacity = 128;
+    const int capacity = 128;
     unionResult = new int[capacity];
 
     collectUniqueElementsFromMatrix(firstMatrix, unionResult, count, capacity);
