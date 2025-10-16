@@ -1,7 +1,7 @@
 #ifndef TRIANGLE_HPP
 #define TRIANGLE_HPP
 
-#include "shapes.hpp"
+#include "../header/shapes.hpp"
 #include <cmath>
 #include <iostream>
 #include <string>
