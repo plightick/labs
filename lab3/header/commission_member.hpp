@@ -3,7 +3,7 @@
 
 #include "person.hpp"
 
-class CommissionMember :virtual public Person {
+class CommissionMember :public Person {
 private:
     std::string commissionName;
     int appointmentYear;

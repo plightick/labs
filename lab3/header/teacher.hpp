@@ -3,7 +3,7 @@
 
 #include "person.hpp"
 
-class Teacher :virtual public Person {
+class Teacher :public Person {
 private:
     std::string position;
     std::string degree;
