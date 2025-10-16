@@ -3,25 +3,26 @@
 
 #include "person.hpp"
 #include <string_view>
+#include <span>
 
 class CommissionMember : public Person {
 private:
-    std::string commissionName;
-    int appointmentYear;
-    std::string certificateNumber;
-    std::string* autobiographyEntries;
-    int autobiographyCount;
+    std::string commissionName = "";
+    int appointmentYear = 0;
+    std::string certificateNumber = "";
+    std::string* autobiographyEntries = nullptr;
+    int autobiographyCount = 0;
 
 public:
     CommissionMember();
     CommissionMember(const CommissionMember& other);
     CommissionMember& operator=(const CommissionMember& other);
-    ~CommissionMember();
+    ~CommissionMember() override;
 
     void setCommissionName(std::string_view commissionName);
-    void setAppointmentYear(int appointmentYear);
-    void setCertificateNumber(std::string_view certificateNumber);
-    void setAutobiography(std::string* entries, int count);
+    void setAppointmentYear(int year);  
+    void setCertificateNumber(std::string_view number);  
+    void setAutobiography(std::span<const std::string> entries);  
 
     std::string getCommissionName() const;
     int getAppointmentYear() const;

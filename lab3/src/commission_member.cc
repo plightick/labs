@@ -1,17 +1,16 @@
 #include "commission_member.hpp"
 #include <iostream>
+#include <span>
 using namespace std;
 
-CommissionMember::CommissionMember()
-    : commissionName(""), appointmentYear(0), certificateNumber(""),
-      autobiographyEntries(nullptr), autobiographyCount(0) {}
+CommissionMember::CommissionMember() {}
 
-CommissionMember::CommissionMember(const CommissionMember& other) : Person(other), 
-    commissionName(other.commissionName),
-    appointmentYear(other.appointmentYear),
-    certificateNumber(other.certificateNumber),
-    autobiographyCount(other.autobiographyCount)
-{
+CommissionMember::CommissionMember(const CommissionMember& other) : Person(other) {
+    commissionName = other.commissionName;
+    appointmentYear = other.appointmentYear;
+    certificateNumber = other.certificateNumber;
+    autobiographyCount = other.autobiographyCount;
+
     if (autobiographyCount > 0) {
         autobiographyEntries = new string[autobiographyCount];
         for (int i = 0; i < autobiographyCount; i++)
@@ -44,25 +43,28 @@ CommissionMember& CommissionMember::operator=(const CommissionMember& other) {
 
 CommissionMember::~CommissionMember() { delete[] autobiographyEntries; }
 
-// ИСПРАВЛЕННЫЕ МЕТОДЫ С std::string_view
-void CommissionMember::setCommissionName(std::string_view commissionName) { 
+void CommissionMember::setCommissionName(string_view commissionName) { 
     this->commissionName = commissionName; 
 }
 
-void CommissionMember::setAppointmentYear(int appointmentYear) { 
-    this->appointmentYear = appointmentYear; 
+void CommissionMember::setAppointmentYear(int year) { 
+    appointmentYear = year;
 }
 
-void CommissionMember::setCertificateNumber(std::string_view certificateNumber) { 
-    this->certificateNumber = certificateNumber; 
+void CommissionMember::setCertificateNumber(string_view number) {  
+    certificateNumber = number;
 }
 
-void CommissionMember::setAutobiography(string* entries, int count) {
+void CommissionMember::setAutobiography(span<const string> entries) {  
     delete[] autobiographyEntries;
-    autobiographyCount = count;
-    autobiographyEntries = new string[count];
-    for (int i = 0; i < count; i++)
-        autobiographyEntries[i] = entries[i];
+    autobiographyCount = entries.size();
+    if (autobiographyCount > 0) {
+        autobiographyEntries = new string[autobiographyCount];
+        for (int i = 0; i < autobiographyCount; i++)
+            autobiographyEntries[i] = entries[i];
+    } else {
+        autobiographyEntries = nullptr;
+    }
 }
 
 string CommissionMember::getCommissionName() const { return commissionName; }
