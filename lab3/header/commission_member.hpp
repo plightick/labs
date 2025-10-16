@@ -2,8 +2,9 @@
 #define COMMISSION_MEMBER_HPP
 
 #include "person.hpp"
+#include <string_view>
 
-class CommissionMember :public Person {
+class CommissionMember : public Person {
 private:
     std::string commissionName;
     int appointmentYear;
@@ -17,9 +18,9 @@ public:
     CommissionMember& operator=(const CommissionMember& other);
     ~CommissionMember();
 
-    void setCommissionName(const std::string& commissionName);
+    void setCommissionName(std::string_view commissionName);
     void setAppointmentYear(int appointmentYear);
-    void setCertificateNumber(const std::string& certificateNumber);
+    void setCertificateNumber(std::string_view certificateNumber);
     void setAutobiography(std::string* entries, int count);
 
     std::string getCommissionName() const;

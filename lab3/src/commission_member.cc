@@ -6,12 +6,12 @@ CommissionMember::CommissionMember()
     : commissionName(""), appointmentYear(0), certificateNumber(""),
       autobiographyEntries(nullptr), autobiographyCount(0) {}
 
-CommissionMember::CommissionMember(const CommissionMember& other) : Person(other) {
-    commissionName = other.commissionName;
-    appointmentYear = other.appointmentYear;
-    certificateNumber = other.certificateNumber;
-    autobiographyCount = other.autobiographyCount;
-
+CommissionMember::CommissionMember(const CommissionMember& other) : Person(other), 
+    commissionName(other.commissionName),
+    appointmentYear(other.appointmentYear),
+    certificateNumber(other.certificateNumber),
+    autobiographyCount(other.autobiographyCount)
+{
     if (autobiographyCount > 0) {
         autobiographyEntries = new string[autobiographyCount];
         for (int i = 0; i < autobiographyCount; i++)
@@ -44,9 +44,19 @@ CommissionMember& CommissionMember::operator=(const CommissionMember& other) {
 
 CommissionMember::~CommissionMember() { delete[] autobiographyEntries; }
 
-void CommissionMember::setCommissionName(const string& commissionName) { this->commissionName = commissionName; }
-void CommissionMember::setAppointmentYear(int appointmentYear) { this->appointmentYear = appointmentYear; }
-void CommissionMember::setCertificateNumber(const string& certificateNumber) { this->certificateNumber = certificateNumber; }
+// ИСПРАВЛЕННЫЕ МЕТОДЫ С std::string_view
+void CommissionMember::setCommissionName(std::string_view commissionName) { 
+    this->commissionName = commissionName; 
+}
+
+void CommissionMember::setAppointmentYear(int appointmentYear) { 
+    this->appointmentYear = appointmentYear; 
+}
+
+void CommissionMember::setCertificateNumber(std::string_view certificateNumber) { 
+    this->certificateNumber = certificateNumber; 
+}
+
 void CommissionMember::setAutobiography(string* entries, int count) {
     delete[] autobiographyEntries;
     autobiographyCount = count;
