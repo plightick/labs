@@ -4,8 +4,7 @@ using namespace std;
 
 TeacherCommissionMember::TeacherCommissionMember() : commissionWorks(nullptr), commissionWorkCount(0) {}
 
-TeacherCommissionMember::TeacherCommissionMember(const TeacherCommissionMember& other)
-    : Teacher(other), CommissionMember(other) {
+TeacherCommissionMember::TeacherCommissionMember(const TeacherCommissionMember& other): Teacher(other), CommissionMember(other) {
     commissionWorkCount = other.commissionWorkCount;
     if (commissionWorkCount > 0) {
         commissionWorks = new string[commissionWorkCount];
