@@ -47,8 +47,14 @@ void inputTeacher(Teacher*& teacher) {
     delete teacher;
     teacher = new Teacher();
 
-    string firstName, lastName, middleName, position, degree, specialty;
-    int yearOfBirth, publicationCount;
+    string firstName;
+    string lastName;
+    string middleName;
+    string position;
+    string degree;
+    string specialty;
+    int yearOfBirth;
+    int publicationCount;
 
     cout << "Имя: "; cin >> firstName;
     cout << "Фамилия: "; cin >> lastName;
