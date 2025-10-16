@@ -15,7 +15,7 @@ public:
     Teacher();
     Teacher(const Teacher& other);
     Teacher& operator=(const Teacher& other);
-    ~Teacher();
+    ~Teacher() override;
 
     void setPosition(const std::string& position);
     void setDegree(const std::string& degree);
@@ -28,7 +28,6 @@ public:
     int getPublicationCount() const;
     std::string getPublication(int index) const;
 
-    
     void print() const override;
 };
 

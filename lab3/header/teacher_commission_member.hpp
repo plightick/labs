@@ -13,13 +13,13 @@ public:
     TeacherCommissionMember();
     TeacherCommissionMember(const TeacherCommissionMember& other);
     TeacherCommissionMember& operator=(const TeacherCommissionMember& other);
-    ~TeacherCommissionMember();
+    ~TeacherCommissionMember() override;
 
     void setCommissionWorks(std::string* works, int count);
     int getCommissionWorkCount() const;
     std::string getCommissionWork(int index) const;
 
-    
+
     void print() const override;
 };
 
