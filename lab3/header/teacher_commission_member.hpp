@@ -3,11 +3,13 @@
 
 #include "teacher.hpp"
 #include "commission_member.hpp"
+#include <string_view>
+#include <span>
 
 class TeacherCommissionMember : public Teacher, public CommissionMember {
 private:
-    std::string* commissionWorks;
-    int commissionWorkCount;
+    std::string* commissionWorks = nullptr;
+    int commissionWorkCount = 0;
 
 public:
     TeacherCommissionMember();
@@ -15,10 +17,9 @@ public:
     TeacherCommissionMember& operator=(const TeacherCommissionMember& other);
     ~TeacherCommissionMember() override;
 
-    void setCommissionWorks(std::string* works, int count);
+    void setCommissionWorks(std::span<const std::string> works);
     int getCommissionWorkCount() const;
     std::string getCommissionWork(int index) const;
-
 
     void print() const override;
 };

@@ -1,11 +1,15 @@
 #include "teacher_commission_member.hpp"
 #include <iostream>
+#include <span>
 using namespace std;
 
-TeacherCommissionMember::TeacherCommissionMember() : commissionWorks(nullptr), commissionWorkCount(0) {}
+TeacherCommissionMember::TeacherCommissionMember() = default;
 
-TeacherCommissionMember::TeacherCommissionMember(const TeacherCommissionMember& other): Teacher(other), CommissionMember(other) {
-    commissionWorkCount = other.commissionWorkCount;
+TeacherCommissionMember::TeacherCommissionMember(const TeacherCommissionMember& other) 
+    : Teacher(other), 
+      CommissionMember(other),
+      commissionWorkCount(other.commissionWorkCount) {
+    
     if (commissionWorkCount > 0) {
         commissionWorks = new string[commissionWorkCount];
         for (int i = 0; i < commissionWorkCount; i++)
@@ -17,6 +21,7 @@ TeacherCommissionMember::TeacherCommissionMember(const TeacherCommissionMember& 
 
 TeacherCommissionMember& TeacherCommissionMember::operator=(const TeacherCommissionMember& other) {
     if (this == &other) return *this;
+    
     Teacher::operator=(other);
     CommissionMember::operator=(other);
 
@@ -32,17 +37,25 @@ TeacherCommissionMember& TeacherCommissionMember::operator=(const TeacherCommiss
     return *this;
 }
 
-TeacherCommissionMember::~TeacherCommissionMember() { delete[] commissionWorks; }
-
-void TeacherCommissionMember::setCommissionWorks(string* works, int count) {
-    delete[] commissionWorks;
-    commissionWorkCount = count;
-    commissionWorks = new string[count];
-    for (int i = 0; i < count; i++)
-        commissionWorks[i] = works[i];
+TeacherCommissionMember::~TeacherCommissionMember() { 
+    delete[] commissionWorks; 
 }
 
-int TeacherCommissionMember::getCommissionWorkCount() const { return commissionWorkCount; }
+void TeacherCommissionMember::setCommissionWorks(span<const string> works) {
+    delete[] commissionWorks;
+    commissionWorkCount = works.size();
+    if (commissionWorkCount > 0) {
+        commissionWorks = new string[commissionWorkCount];
+        for (int i = 0; i < commissionWorkCount; i++)
+            commissionWorks[i] = works[i];
+    } else {
+        commissionWorks = nullptr;
+    }
+}
+
+int TeacherCommissionMember::getCommissionWorkCount() const { 
+    return commissionWorkCount; 
+}
 
 string TeacherCommissionMember::getCommissionWork(int index) const {
     return (index >= 0 && index < commissionWorkCount) ? commissionWorks[index] : "";
