@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include <string_view>
 
 class Person {
 private:
@@ -13,7 +14,7 @@ private:
 
 public:
     Person();
-    Person(const std::string& firstName, const std::string& lastName, const std::string& middleName, int yearOfBirth);
+    Person(std::string_view firstName, std::string_view lastName, std::string_view middleName, int yearOfBirth);
     virtual ~Person() = default;
 
     std::string getFirstName() const;
@@ -21,9 +22,9 @@ public:
     std::string getMiddleName() const;
     int getYearOfBirth() const;
 
-    void setFirstName(const std::string& firstName);
-    void setLastName(const std::string& lastName);
-    void setMiddleName(const std::string& middleName);
+    void setFirstName(std::string_view firstName);
+    void setLastName(std::string_view lastName);
+    void setMiddleName(std::string_view middleName);
     void setYearOfBirth(int yearOfBirth);
 
     virtual void print() const;

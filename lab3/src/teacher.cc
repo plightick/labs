@@ -1,15 +1,17 @@
 #include "teacher.hpp"
 #include <iostream>
+#include <span>
 using namespace std;
 
-Teacher::Teacher() : position(""), degree(""), specialty(""), publications(nullptr), publicationCount(0) {}
+Teacher::Teacher() = default;
 
-Teacher::Teacher(const Teacher& other) : Person(other) {
-    position = other.position;
-    degree = other.degree;
-    specialty = other.specialty;
-    publicationCount = other.publicationCount;
-
+Teacher::Teacher(const Teacher& other) 
+    : Person(other),
+      position(other.position),
+      degree(other.degree),
+      specialty(other.specialty),
+      publicationCount(other.publicationCount) {
+    
     if (publicationCount > 0) {
         publications = new string[publicationCount];
         for (int i = 0; i < publicationCount; i++)
@@ -42,16 +44,20 @@ Teacher& Teacher::operator=(const Teacher& other) {
 
 Teacher::~Teacher() { delete[] publications; }
 
-void Teacher::setPosition(const string& position) { this->position = position; }
-void Teacher::setDegree(const string& degree) { this->degree = degree; }
-void Teacher::setSpecialty(const string& specialty) { this->specialty = specialty; }
+void Teacher::setPosition(string_view pos) { position = pos; }
+void Teacher::setDegree(string_view deg) { degree = deg; }
+void Teacher::setSpecialty(string_view spec) { specialty = spec; }
 
-void Teacher::setPublications(string* publications, int publicationCount) {
-    delete[] this->publications;
-    this->publicationCount = publicationCount;
-    this->publications = new string[publicationCount];
-    for (int i = 0; i < publicationCount; i++)
-        this->publications[i] = publications[i];
+void Teacher::setPublications(span<const string> pubs) {
+    delete[] publications;
+    publicationCount = pubs.size();
+    if (publicationCount > 0) {
+        publications = new string[publicationCount];
+        for (int i = 0; i < publicationCount; i++)
+            publications[i] = pubs[i];
+    } else {
+        publications = nullptr;
+    }
 }
 
 string Teacher::getPosition() const { return position; }
