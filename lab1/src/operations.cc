@@ -105,8 +105,8 @@ int* findUnion(const Matrix* firstMatrix, const Matrix* secondMatrix, int& resul
     const int capacity = 128;
     unionResult = new int[capacity];
 
-    collectUniqueElementsFromMatrix(firstMatrix, unionResult, count, capacity);
-    collectUniqueElementsFromMatrix(secondMatrix, unionResult, count, capacity);
+    //collectUniqueElementsFromMatrix(firstMatrix, unionResult, count, capacity);
+    //collectUniqueElementsFromMatrix(secondMatrix, unionResult, count, capacity);
 
     int* finalResult = compactArray(unionResult, count);
     delete[] unionResult;
