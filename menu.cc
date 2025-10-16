@@ -1,7 +1,6 @@
 #include "menu.hpp"
 #include <iostream>
 #include <sstream>
-#include <limits>
 #include <memory>
 #include <vector>
 
@@ -13,8 +12,9 @@ double get_double() {
 
     while (true) {
         std::getline(std::cin, input);
-        std::stringstream ss(input);
-        if (ss >> number && ss.eof()) return number;
+        if (std::stringstream ss(input); ss >> number && ss.eof()) {
+            return number;
+        }
         std::cout << "Ошибка. Введите число: ";
     }
 }
@@ -25,8 +25,9 @@ int get_int() {
 
     while (true) {
         std::getline(std::cin, input);
-        std::stringstream ss(input);
-        if (ss >> number && ss.eof()) return number;
+        if (std::stringstream ss(input); ss >> number && ss.eof()) {
+            return number;
+        }
         std::cout << "Ошибка. Введите число: ";
     }
 }
@@ -40,6 +41,27 @@ void print_menu() {
               << "0 - Выход\n";
 }
 
+std::unique_ptr<Shape> create_circle() {
+    std::cout << "Введите радиус: ";
+    double r = get_double();
+    return std::make_unique<Circle>(r);
+}
+
+std::unique_ptr<Shape> create_triangle() {
+    std::cout << "Введите два катета: ";
+    double a = get_double();
+    double b = get_double();
+    return std::make_unique<Triangle>(a, b);
+}
+
+std::unique_ptr<Shape> create_trapezoid() {
+    std::cout << "Введите два основания и высоту: ";
+    double a = get_double();
+    double b = get_double();
+    double h = get_double();
+    return std::make_unique<Trapezoid>(a, b, h);
+}
+
 std::unique_ptr<Shape> create_figure() {
     std::cout << "Выберите фигуру:\n"
               << "1 - Круг\n"
@@ -49,31 +71,84 @@ std::unique_ptr<Shape> create_figure() {
     int choice = get_int();
 
     switch (choice) {
-        case 1: {
-            std::cout << "Введите радиус: ";
-            double r = get_double();
-            return std::make_unique<Circle>(r);
-        }
-        case 2: {
-            std::cout << "Введите два катета: ";
-            double a = get_double();
-            double b = get_double();
-            return std::make_unique<Triangle>(a, b);
-        }
-        case 3: {
-            std::cout << "Введите два основания и высоту: ";
-            double a = get_double();
-            double b = get_double();
-            double h = get_double();
-            return std::make_unique<Trapezoid>(a, b, h);
-        }
+        case 1:
+            return create_circle();
+        case 2:
+            return create_triangle();
+        case 3:
+            return create_trapezoid();
         default:
             std::cout << "Неверный выбор.\n";
             return nullptr;
     }
 }
 
-} // namespace
+void handle_create_figure(std::vector<std::unique_ptr<Shape>>& shapes) {
+    if (auto shape = create_figure(); shape) {
+        shapes.push_back(std::move(shape));
+    }
+}
+
+void handle_show_area_perimeter(const std::vector<std::unique_ptr<Shape>>& shapes) {
+    if (shapes.empty()) {
+        std::cout << "Нет фигур.\n";
+        return;
+    }
+    
+    for (const auto& shape : shapes) {
+        std::cout << shape->name()
+                  << " — площадь: " << shape->square()
+                  << ", периметр: " << shape->perimeter() << '\n';
+    }
+}
+
+void handle_show_parameters(const std::vector<std::unique_ptr<Shape>>& shapes) {
+    if (shapes.empty()) {
+        std::cout << "Нет фигур.\n";
+        return;
+    }
+    
+    for (const auto& shape : shapes) {
+        std::cout << shape->name() << ": ";
+        shape->parameters();
+    }
+}
+
+void handle_visualization(const std::vector<std::unique_ptr<Shape>>& shapes) {
+    if (shapes.empty()) {
+        std::cout << "Нет фигур для отображения.\n";
+        return;
+    }
+    
+    for (const auto& shape : shapes) {
+        std::cout << "\nФигура: " << shape->name() << "\n";
+        shape->draw();
+    }
+}
+
+void process_menu_choice(int choice, std::vector<std::unique_ptr<Shape>>& shapes) {
+    switch (choice) {
+        case 1:
+            handle_create_figure(shapes);
+            break;
+        case 2:
+            handle_show_area_perimeter(shapes);
+            break;
+        case 3:
+            handle_show_parameters(shapes);
+            break;
+        case 4:
+            handle_visualization(shapes);
+            break;
+        case 0:
+            std::cout << "Выход...\n";
+            break;
+        default:
+            std::cout << "Неверный ввод.\n";
+    }
+}
+
+} 
 
 void menu() {
     std::vector<std::unique_ptr<Shape>> shapes;
@@ -82,50 +157,6 @@ void menu() {
     do {
         print_menu();
         choice = get_int();
-
-        switch (choice) {
-            case 1: {
-                auto shape = create_figure();
-                if (shape) shapes.push_back(std::move(shape));
-                break;
-            }
-            case 2:
-                if (shapes.empty()) {
-                    std::cout << "Нет фигур.\n";
-                } else {
-                    for (const auto& s : shapes) {
-                        std::cout << s->name()
-                                  << " — площадь: " << s->square()
-                                  << ", периметр: " << s->perimeter() << '\n';
-                    }
-                }
-                break;
-            case 3:
-                if (shapes.empty()) {
-                    std::cout << "Нет фигур.\n";
-                } else {
-                    for (const auto& s : shapes) {
-                        std::cout << s->name() << ": ";
-                        s->parameters();
-                    }
-                }
-                break;
-            case 4:
-                if (shapes.empty()) {
-                    std::cout << "Нет фигур для отображения.\n";
-                } else {
-                    for (const auto& s : shapes) {
-                        std::cout << "\nФигура: " << s->name() << "\n";
-                        s->draw();
-                    }
-                }
-                break;
-            case 0:
-                std::cout << "Выход...\n";
-                break;
-            default:
-                std::cout << "Неверный ввод.\n";
-        }
-
+        process_menu_choice(choice, shapes);
     } while (choice != 0);
 }

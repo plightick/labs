@@ -1,15 +1,14 @@
 #include "circle.hpp"
 #include <iostream>
 #include <cmath>
-
-constexpr double PI = 3.14159265358979323846;
+#include <numbers> 
 
 double Circle::square() const {
-    return PI * radius_ * radius_;
+    return std::numbers::pi * radius_ * radius_;
 }
 
 double Circle::perimeter() const {
-    return 2 * PI * radius_;
+    return 2 * std::numbers::pi * radius_;
 }
 
 void Circle::parameters() const {

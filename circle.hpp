@@ -2,9 +2,7 @@
 #define CIRCLE_HPP
 
 #include "shapes.hpp"
-#include <cmath>
-#include <iostream>
-#include <string>
+#include <string>  
 
 class Circle : public Shape {
 public:
@@ -14,8 +12,7 @@ public:
     double perimeter() const override;
     void parameters() const override;
     std::string name() const override;
-
-    void draw() const override; // ✅ добавлено здесь
+    void draw() const override;
 
 private:
     double radius_;
