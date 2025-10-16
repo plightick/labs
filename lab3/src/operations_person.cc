@@ -29,7 +29,9 @@ void inputPerson(Person*& person) {
     delete person;
     person = new Person();
 
-    string firstName, lastName, middleName;
+    string firstName;
+    string lastName;
+    string middleName;
     int yearOfBirth;
 
     cout << "Имя: "; cin >> firstName;
@@ -86,8 +88,14 @@ void inputCommissionMember(CommissionMember*& member) {
     delete member;
     member = new CommissionMember();
 
-    string firstName, lastName, middleName, commissionName, certificateNumber;
-    int yearOfBirth, appointmentYear, autobiographyCount;
+    string firstName;
+    string lastName;
+    string middleName;
+    string commissionName;
+    string certificateNumber;
+    int yearOfBirth;
+    int appointmentYear;
+    int autobiographyCount;
 
     cout << "Имя: "; cin >> firstName;
     cout << "Фамилия: "; cin >> lastName;
@@ -119,9 +127,14 @@ void inputTeacherCommissionMember(TeacherCommissionMember*& tcm) {
     delete tcm;
     tcm = new TeacherCommissionMember();
 
-    // сначала вводим поля Teacher
-    string firstName, lastName, middleName, position, degree, specialty;
-    int yearOfBirth, publicationCount;
+    string firstName;
+    string lastName;
+    string middleName;
+    string position;
+    string degree;
+    string specialty;
+    int yearOfBirth;
+    int publicationCount;
 
     cout << "Имя: "; cin >> firstName;
     cout << "Фамилия: "; cin >> lastName;
@@ -147,9 +160,10 @@ void inputTeacherCommissionMember(TeacherCommissionMember*& tcm) {
     tcm->setPublications(publications, publicationCount);
     delete[] publications;
 
-    // ввод полей CommissionMember
-    string commissionName, certificateNumber;
-    int appointmentYear, autobiographyCount;
+    string commissionName;
+    string certificateNumber;
+    int appointmentYear;
+    int autobiographyCount;
 
     cout << "Название комиссии: "; cin >> commissionName;
     cout << "Год назначения: "; appointmentYear = checkInt();
@@ -167,7 +181,6 @@ void inputTeacherCommissionMember(TeacherCommissionMember*& tcm) {
     tcm->setAutobiography(autobiography, autobiographyCount);
     delete[] autobiography;
 
-    // ввод работ в комиссии
     int commissionWorkCount;
     cout << "Количество работ в комиссии: "; commissionWorkCount = checkInt();
     string* works = new string[commissionWorkCount];
