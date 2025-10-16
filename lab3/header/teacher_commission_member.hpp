@@ -19,6 +19,7 @@ public:
     int getCommissionWorkCount() const;
     std::string getCommissionWork(int index) const;
 
+    
     void print() const override;
 };
 

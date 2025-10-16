@@ -28,6 +28,7 @@ public:
     int getPublicationCount() const;
     std::string getPublication(int index) const;
 
+    
     void print() const override;
 };
 

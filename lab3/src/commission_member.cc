@@ -3,14 +3,15 @@
 #include <span>
 using namespace std;
 
-CommissionMember::CommissionMember() {}
+CommissionMember::CommissionMember() = default;
 
-CommissionMember::CommissionMember(const CommissionMember& other) : Person(other) {
-    commissionName = other.commissionName;
-    appointmentYear = other.appointmentYear;
-    certificateNumber = other.certificateNumber;
-    autobiographyCount = other.autobiographyCount;
-
+CommissionMember::CommissionMember(const CommissionMember& other) 
+    : Person(other),
+      commissionName(other.commissionName),
+      appointmentYear(other.appointmentYear),
+      certificateNumber(other.certificateNumber),
+      autobiographyCount(other.autobiographyCount) {
+    
     if (autobiographyCount > 0) {
         autobiographyEntries = new string[autobiographyCount];
         for (int i = 0; i < autobiographyCount; i++)
@@ -43,19 +44,19 @@ CommissionMember& CommissionMember::operator=(const CommissionMember& other) {
 
 CommissionMember::~CommissionMember() { delete[] autobiographyEntries; }
 
-void CommissionMember::setCommissionName(string_view commissionName) { 
-    this->commissionName = commissionName; 
+void CommissionMember::setCommissionName(string_view name) { 
+    commissionName = name; 
 }
 
 void CommissionMember::setAppointmentYear(int year) { 
     appointmentYear = year;
 }
 
-void CommissionMember::setCertificateNumber(string_view number) {  
+void CommissionMember::setCertificateNumber(string_view number) { 
     certificateNumber = number;
 }
 
-void CommissionMember::setAutobiography(span<const string> entries) {  
+void CommissionMember::setAutobiography(span<const string> entries) {
     delete[] autobiographyEntries;
     autobiographyCount = entries.size();
     if (autobiographyCount > 0) {
