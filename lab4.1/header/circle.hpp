@@ -2,7 +2,8 @@
 #define CIRCLE_HPP
 
 #include "../header/shapes.hpp"
-#include <string>  
+#include <string> 
+#include <cmath> 
 
 class Circle : public Shape {
 public:

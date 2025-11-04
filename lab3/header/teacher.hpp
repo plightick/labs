@@ -5,7 +5,7 @@
 #include <string_view>
 #include <span>
 
-class Teacher : public Person {
+class Teacher : virtual public Person {
 private:
     std::string position = "";
     std::string degree = "";

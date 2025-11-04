@@ -13,8 +13,6 @@ void inputTeacher(Teacher*& teacher);
 void inputCommissionMember(CommissionMember*& member);
 void inputTeacherCommissionMember(TeacherCommissionMember*& tcm);
 
-void printObjects(const Person* person, const Teacher* teacher,
-                  const CommissionMember* member,
-                  const TeacherCommissionMember* tcm);
+void printObjects(const Person* person, const Teacher* teacher, const CommissionMember* member,const TeacherCommissionMember* tcm);
 
 #endif

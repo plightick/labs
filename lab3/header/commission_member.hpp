@@ -5,7 +5,7 @@
 #include <string_view>
 #include <span>
 
-class CommissionMember : public Person {
+class CommissionMember :virtual public Person {
 private:
     std::string commissionName = "";
     int appointmentYear = 0;

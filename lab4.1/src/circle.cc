@@ -8,7 +8,7 @@ double Circle::square() const {
 }
 
 double Circle::perimeter() const {
-    return 2 * std::numbers::pi * radius_;
+    return 2 * std::numbers::pi * radius_  ;
 }
 
 void Circle::parameters() const {
