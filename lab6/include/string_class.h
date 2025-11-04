@@ -5,11 +5,11 @@
 
 class String {
 private:
-    char* data_;
-    int length_;
-    static const int MAX_LENGTH = 20;
-    void validate_length(int length) const;
-    void allocate_and_copy(const char* str, int length);
+    char* data;
+    int lengthNew;
+    static const int maxLength = 20;
+    void validateLength(int length) const;
+    void allocateAndCopy(const char* str, int length);
     
 public:
     String();
@@ -20,9 +20,9 @@ public:
     
     friend String operator+(const String& lhs, const String& rhs);
     
-    const char* get_data() const { return data_; }
-    int length() const { return length_; }
-    bool empty() const { return length_ == 0; }
+    const char* get_data() const { return data; }
+    int length() const { return lengthNew; }
+    bool empty() const { return lengthNew == 0; }
     void print() const;
 };
 

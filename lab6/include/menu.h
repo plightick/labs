@@ -1,5 +1,5 @@
-#ifndef STRING_MENU_H
-#define STRING_MENU_H
+#ifndef MENU_H
+#define MENU_H
 
 #include "string_class.h"
 #include "string_exceptions.h"
@@ -11,12 +11,12 @@
 using namespace std;
 
 template<typename T>
-T check_numbers();
+T checkNumbers();
 
-void hand_input_string(String& str);
-void print_string_menu();
-void show_strings(const String& str1, const String& str2);
-void concatenate_strings(const String& str1, const String& str2);
-void string_menu();
+void handInputString(String& str);
+void printStringMenu();
+void showStrings(const String& str1, const String& str2);
+void concatenateStrings(const String& str1, const String& str2);
+void stringMenu();
 
 #endif

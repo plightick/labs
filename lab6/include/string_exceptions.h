@@ -1,41 +1,41 @@
-#ifndef STRING_EXCEPTIONS_H
-#define STRING_EXCEPTIONS_H
+#ifndef STRINGEXCEPTIONS_H
+#define STRINGEXCEPTIONS_H
 
 #include <string>
 #include <stdexcept>
 
-class String_exception : public std::exception {
+class StringException : public std::exception {
 private:
-    std::string message_;
+    std::string newMessage;
     
 public:
-    explicit String_exception(const std::string& message) {
-        message_ = message;
+    explicit StringException(const std::string& message) {
+        newMessage = message;
     }
     
     const char* what() const noexcept override {
-        return message_.c_str();
+        return newMessage.c_str();
     }
 };
 
-class String_length_exception : public String_exception {
+class StringLengthNewException : public StringException {
 public:
-    explicit String_length_exception(const std::string& operation, int max_length, int actual_length)
-        : String_exception("Ошибка в операции '" + operation + "': максимальная длина " + 
-                          std::to_string(max_length) + ", фактическая длина " + 
-                          std::to_string(actual_length)) {}
+    explicit StringLengthNewException(const std::string& operation, int maxLength, int actualLength)
+        : StringException("Ошибка в операции '" + operation + "': максимальная длина " + 
+                          std::to_string(maxLength) + ", фактическая длина " + 
+                          std::to_string(actualLength)) {}
 };
 
-class String_constructor_exception : public String_length_exception {
+class stringConstructorException : public StringLengthNewException {
 public:
-    String_constructor_exception(int max_length, int actual_length)
-        : String_length_exception("конструктор", max_length, actual_length) {}
+    stringConstructorException(int maxLength, int actualLength)
+        : StringLengthNewException("конструктор", maxLength, actualLength) {}
 };
 
-class String_concatenation_exception : public String_length_exception {
+class StringConcatenationException : public StringLengthNewException {
 public:
-    String_concatenation_exception(int max_length, int actual_length)
-        : String_length_exception("конкатенация", max_length, actual_length) {}
+    StringConcatenationException(int maxLength, int actualLength)
+        : StringLengthNewException("конкатенация", maxLength, actualLength) {}
 };
 
 #endif

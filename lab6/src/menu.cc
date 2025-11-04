@@ -7,7 +7,7 @@
 using namespace std;
 
 template<typename T>
-T check_numbers() {
+T checkNumbers() {
     T number;
     string input;
     
@@ -21,9 +21,9 @@ T check_numbers() {
     }
 }
 
-template int check_numbers<int>();
+template int checkNumbers<int>();
 
-void hand_input_string(String& str) {
+void handInputString(String& str) {
     cout << "Ввод строки" << endl;
     cout << "Введите строку: ";
     
@@ -34,12 +34,12 @@ void hand_input_string(String& str) {
         str = String(input.c_str()); 
         cout << "Строка сохранена." << endl;
         str.print();
-    } catch (const String_exception& error) {
+    } catch (const StringException& error) {
         cout << "Ошибка: " << error.what() << endl;
     }
 }
 
-void print_string_menu() {
+void printStringMenu() {
     cout << "\nМеню работы со строками\n"
          << "1 - Ввести первую строку\n"
          << "2 - Ввести вторую строку\n"
@@ -49,14 +49,14 @@ void print_string_menu() {
          << "Введите число от 0 до 4: ";
 }
 
-void show_strings(const String& str1, const String& str2) {
+void showStrings(const String& str1, const String& str2) {
     cout << "Первая строка: ";
     str1.print();
     cout << "Вторая строка: ";
     str2.print();
 }
 
-void concatenate_strings(const String& str1, const String& str2) {
+void concatenateStrings(const String& str1, const String& str2) {
     cout << "Объединение строк:" << endl;
     str1.print();
     cout << " + " << endl;
@@ -66,34 +66,34 @@ void concatenate_strings(const String& str1, const String& str2) {
     try {
         String result = str1 + str2;
         result.print();
-    } catch (const String_exception& error) {
+    } catch (const StringException& error) {
         cout << "Ошибка при объединении: " << error.what() << endl;
     }
 }
 
-void string_menu() {
+void stringMenu() {
     int choice = 0;
     String str1, str2;
 
     do {
         system("clear");
-        print_string_menu();
-        choice = check_numbers<int>();
+        printStringMenu();
+        choice = checkNumbers<int>();
 
         switch (choice) {
         case 1:
             system("clear");
-            hand_input_string(str1);
+            handInputString(str1);
             break;
         
         case 2:
             system("clear");
-            hand_input_string(str2);
+            handInputString(str2);
             break;
             
         case 3:
             system("clear");
-            show_strings(str1, str2);
+            showStrings(str1, str2);
             break;
             
         case 4:
@@ -101,7 +101,7 @@ void string_menu() {
             if (str1.empty() && str2.empty()) {
                 cout << "Обе строки пусты. Сначала введите строки." << endl;
             } else {
-                concatenate_strings(str1, str2);
+                concatenateStrings(str1, str2);
             }
             break;
             

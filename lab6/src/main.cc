@@ -1,6 +1,6 @@
 #include "../include/menu.h"
 
 int main() {
-    string_menu();
+    stringMenu();
     return 0;
 }

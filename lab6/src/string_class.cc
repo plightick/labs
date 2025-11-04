@@ -3,82 +3,82 @@
 #include <iostream>
 #include <cstring>
 
-const int String::MAX_LENGTH;
+const int String::maxLength;
 
-String::String() : data_(nullptr), length_(0) {}
+String::String() : data(nullptr), lengthNew(0) {}
 
 String::String(const char* str) {
     if (str == nullptr) {
-        length_ = 0;
-        data_ = nullptr;
+        lengthNew = 0;
+        data = nullptr;
         return;
     }
     
-    length_ = std::strlen(str);
-    validate_length(length_);
-    allocate_and_copy(str, length_);
+    lengthNew = std::strlen(str);
+    validateLength(lengthNew);
+    allocateAndCopy(str, lengthNew);
 }
 
-String::String(const String& other) : length_(other.length_) {
-    allocate_and_copy(other.data_, length_);
+String::String(const String& other) : lengthNew(other.lengthNew) {
+    allocateAndCopy(other.data, lengthNew);
 }
 
 String& String::operator=(const String& other) {
     if (this != &other) {
-        delete[] data_;
-        length_ = other.length_;
-        allocate_and_copy(other.data_, length_);
+        delete[] data;
+        lengthNew = other.lengthNew;
+        allocateAndCopy(other.data, lengthNew);
     }
     return *this;
 }
 
 String::~String() {
-    delete[] data_;
+    delete[] data;
 }
 
 String operator+(const String& lhs, const String& rhs) {
-    int new_length = lhs.length_ + rhs.length_;
+    int newLength = lhs.lengthNew + rhs.lengthNew;
     
-    const_cast<String&>(lhs).validate_length(new_length);
+    const_cast<String&>(lhs).validateLength(newLength);
     
-    char* new_data = new char[new_length + 1];
-    new_data[0] = '\0'; 
+    char* newData = new char[newLength + 1];
+    newData[0] = '\0'; 
     
-    if (lhs.data_ != nullptr) {
-        std::strcpy(new_data, lhs.data_);
+    if (lhs.data != nullptr) {
+        std::strcpy(newData, lhs.data);
     }
     
-    if (rhs.data_ != nullptr) {
-        std::strcat(new_data, rhs.data_);
+    if (rhs.data != nullptr) {
+        std::strcat(newData, rhs.data);
     }
     
     String result;
-    result.length_ = new_length;
-    result.data_ = new_data;
+    result.lengthNew = newLength;
+    result.data = newData;
     
     return result;
 }
 
 void String::print() const {
-    if (data_ == nullptr || length_ == 0) {
+    if (data == nullptr || lengthNew == 0) {
         std::cout << "Строка пуста." << std::endl;
     } else {
-        std::cout << "Строка: \"" << data_ << "\" (длина: " << length_ << ")" << std::endl;
+        std::cout << "Строка: \"" << data << "\" (длина: " << lengthNew << ")" << std::endl;
     }
 }
 
-void String::validate_length(int length) const {
-    if (length > MAX_LENGTH) {
-        throw String_constructor_exception(MAX_LENGTH, length);
+void String::validateLength(int length) const {
+    if (length > maxLength) {
+        throw stringConstructorException(maxLength, length);
     }
 }
 
-void String::allocate_and_copy(const char* str, int length) {
+void String::allocateAndCopy(const char* str, int length) {
     if (str == nullptr || length == 0) {
-        data_ = nullptr;
+        data = nullptr;
         return;
     }
     
-    data_ = new char[length + 1];
-    std::strcpy(data_, str);
+    data = new char[length + 1];
+    std::strcpy(data, str);
 }
