@@ -2,6 +2,7 @@
 #include "../include/string_exceptions.h"
 #include <iostream>
 #include <cstring>
+#include "string_constructor_expection.h"
 
 const int String::maxLength;
 
