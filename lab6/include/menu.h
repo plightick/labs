@@ -13,6 +13,7 @@ using namespace std;
 template<typename T>
 T checkNumbers();
 
+
 void handInputString(String& str);
 void printStringMenu();
 void showStrings(const String& str1, const String& str2);
