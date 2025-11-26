@@ -30,7 +30,6 @@ void ListAlgorithm<T>::sort(List<T>& list) {
     } while (swapped);
 }
 
-// Явные инстанцирования
 template class ListAlgorithm<int>;
 template class ListAlgorithm<double>;
 template class ListAlgorithm<std::string>;

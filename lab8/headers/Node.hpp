@@ -9,4 +9,4 @@ struct Node {
     explicit Node(const T& v) : value(v), next(nullptr) {}
 };
 
-#endif // NODE_HPP
+#endif

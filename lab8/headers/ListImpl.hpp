@@ -47,4 +47,4 @@ typename List<T>::Iterator List<T>::end() const {
     return Iterator(nullptr);
 }
 
-#endif // LISTIMPL_HPP
+#endif

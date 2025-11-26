@@ -27,4 +27,4 @@ private:
 
 #include "ListImpl.hpp"
 
-#endif // LIST_HPP
+#endif
